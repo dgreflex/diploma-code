@@ -12,15 +12,15 @@
 
 `physical.png`
 
-<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/physical.png" alt="physical.png" height="30%">
+<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/physical.png" alt="physical.png" height="10%">
 
 `0.png`
 
-<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/0.png" alt="0.png" height="30%">
+<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/0.png" alt="0.png" height="10%">
 
 `1.png`
 
-<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/1.png" alt="1.png" height="30%">
+<img src="https://github.com/dgreflex/diploma-code/blob/master/etc/1.png" alt="1.png" height="10%">
 
 Формат входных данных -- Json.
 Пример:

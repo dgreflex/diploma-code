@@ -7,6 +7,21 @@
 - Просто билд: `cmake .; make`
 Затем `./main PATH_TO_TEST
 
+Создаваемые программой `.png` файлы - изображения, отображающие структуры графов, полученных на вход программе.
+Пример для `"tests/test1.json"`:
+
+`physical.png`
+
+<img src="https://github.com/dgreflex/diploma-code/etc/physical.json" alt="альтернативный текст" height="30%">
+
+`0.png`
+
+<img src="https://github.com/dgreflex/diploma-code/etc/0.png" alt="0.png" height="30%">
+
+`1.png`
+
+<img src="https://github.com/dgreflex/diploma-code/etc/1.png" alt="1.png" height="30%">
+
 Формат входных данных -- Json.
 Пример:
 ```json

@@ -116,6 +116,15 @@ public:
             distances[vertex.first] = std::numeric_limits<double>::infinity();
         }
 
+        std::map<int, std::vector<std::pair<int, std::shared_ptr<Edge>>>> twoSideAdjacencyList;
+        for (auto &[from, vec] : adjacencyList)
+            for (auto &[to, edge] : vec) {
+                if (twoSideAdjacencyList.find(from) == twoSideAdjacencyList.end())
+                    twoSideAdjacencyList[from] = std::vector<std::pair<int, std::shared_ptr<Edge>>>{};
+                twoSideAdjacencyList[from].push_back({to, edge});
+                twoSideAdjacencyList[to].push_back({from, edge});
+            }
+
         distances[source] = 0;
         queue.push({0, source});
 
@@ -129,7 +138,7 @@ public:
                 break;
             }
 
-            for (const auto &neighbor : adjacencyList[current])
+            for (const auto &neighbor : twoSideAdjacencyList[current])
             {
                 int neighbor_id = neighbor.first;
                 double new_distance = distances[current] + neighbor.second->capacity;

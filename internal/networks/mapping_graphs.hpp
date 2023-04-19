@@ -31,10 +31,10 @@ public:
         {
             return a->hardMemory >= b->hardMemory;
         };
-        // std::function<bool(std::shared_ptr<Edge> &, std::shared_ptr<Edge> &)> capacityCmp = [&](std::shared_ptr<Edge> const &a, std::shared_ptr<Edge> const &b)
-        // {
-        //     return a->capacity >= b->capacity;
-        // };
+        std::function<bool(std::shared_ptr<Edge> &, std::shared_ptr<Edge> &)> capacityCmp = [&](std::shared_ptr<Edge> const &a, std::shared_ptr<Edge> const &b)
+        {
+            return a->capacity >= b->capacity;
+        };
 
         std::vector<std::shared_ptr<Vertex>> vertices;
         for (auto [vertexID, vertex] : this->g->getVertices())
@@ -52,14 +52,14 @@ public:
         for (auto &vertex : vertices)
             this->RAMUsage.insert(1.0, vertex);
 
-        // std::vector<std::shared_ptr<Edge>> edges;
-        // for (auto [vertexID, vertex] : this->g->getVertices())
-        //     for (auto [vertexEndID, edge] : this->g->getAdjacentVertices(vertexID))
-        //         edges.push_back(edge);
+        std::vector<std::shared_ptr<Edge>> edges;
+        for (auto [vertexID, vertex] : this->g->getVertices())
+            for (auto [vertexEndID, edge] : this->g->getAdjacentVertices(vertexID))
+                edges.push_back(edge);
 
-        // std::sort(edges.begin(), edges.end(), capacityCmp);
-        // for (auto &edge : edges)
-        //     this->capacityUsage.insert(1.0, edge);
+        std::sort(edges.begin(), edges.end(), capacityCmp);
+        for (auto &edge : edges)
+            this->capacityUsage.insert(1.0, edge);
     }
 
     // TODO вычитание сразу из всех куч узлов

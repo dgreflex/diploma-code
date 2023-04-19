@@ -94,7 +94,7 @@ public:
         return max_->key;
     }
 
-    void decrease_key(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &node, double new_key)
+    void decrease_key(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &node, KeyType new_key)
     {
         if (!node)
         {
@@ -143,16 +143,16 @@ public:
         }
     }
 
-    void increase_key(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &node, double new_key)
+    void increase_key(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &node, KeyType new_key)
     {
         if (!node)
         {
             throw std::runtime_error("Node does not exist.");
         }
 
-        if (node->key > new_key)
+        if (node->key >= new_key)
         {
-            throw std::runtime_error("New key is smaller than the current key.");
+            return; // Если новый ключ равен или меньше текущего ключа, не выполняем никаких операций
         }
 
         node->key = new_key;
@@ -202,8 +202,8 @@ public:
         {
             if (max_->right != max_)
             {
-                max_->right->left = max_->left;
                 max_->left->right = max_->right;
+                max_->right->left = max_->left;
                 max_ = max_->right;
             }
             else
@@ -409,54 +409,49 @@ private:
 
     void consolidate()
     {
-        std::vector<std::shared_ptr<HeapNode<CoreValue, KeyType>>> A(static_cast<size_t>(std::log2(size_)) + 1);
+        std::vector<std::shared_ptr<HeapNode<CoreValue, KeyType>>> roots_table(
+            static_cast<size_t>(std::log2(size_) + 1), nullptr);
 
-        // Create a vector of nodes from the root list
-        std::vector<std::shared_ptr<HeapNode<CoreValue, KeyType>>> root_nodes;
-        auto current = max_;
+        auto max_old = max_;
+        auto current = max_old;
         do
         {
-            root_nodes.push_back(current);
-            current = current->right;
-        } while (current != max_);
+            auto next = current->right;
+            auto d = current->degree;
 
-        // Process each node in the root list
-        for (auto x : root_nodes)
-        {
-            int d = x->degree;
-
-            while (A[d])
+            while (roots_table[d] != nullptr)
             {
-                auto y = A[d];
-                if (x->key < y->key)
+                auto other = roots_table[d];
+                if (current->key < other->key)
                 {
-                    std::swap(x, y);
+                    std::swap(current, other);
                 }
-                link(y, x);
-                A[d].reset();
+
+                if (other == max_old)
+                {
+                    max_old = other->left;
+                }
+                if (other == next)
+                {
+                    next = other->left;
+                }
+
+                link(other, current);
+                roots_table[d] = nullptr;
                 d++;
             }
-            A[d] = x;
-        }
+            roots_table[d] = current;
+            current = next;
+        } while (current != max_old);
 
-        max_.reset();
-        for (auto &node : A)
+        max_ = nullptr;
+        for (const auto &root : roots_table)
         {
-            if (node)
+            if (root)
             {
-                if (!max_)
+                if (!max_ || root->key > max_->key)
                 {
-                    max_ = node;
-                    max_->right = max_;
-                    max_->left = max_;
-                }
-                else
-                {
-                    insert_to_root_list(node);
-                    if (node->key > max_->key)
-                    {
-                        max_ = node;
-                    }
+                    max_ = root;
                 }
             }
         }

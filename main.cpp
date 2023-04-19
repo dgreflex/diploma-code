@@ -6,6 +6,14 @@
 
 int main(int argc, char *argv[])
 {
+    // std::string filename1 = "/home/reflex/Desktop/Diplom/code/tests/diploma.json";
+    // auto parser1 = JsonGraphParser::getInstance();
+    // auto [physical1, virtuals1] = parser1->parseJsonToGraphs(filename1);
+    // physical1->visualizeGraph(physical1->getName() + ".png");
+
+    // return 0;
+
+    // std::string filename = "/home/reflex/Desktop/Diplom/code/tests/full_connect/test_5.json";
     auto parser = JsonGraphParser::getInstance();
     if (argc < 2)
     {
@@ -13,7 +21,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    auto [physical, virtuals] = parser->parseJsonToGraphs(argv[1]);
+    auto [physical, virtuals] = parser->parseJsonToGraphs(std::string(argv[1]));
 
     auto physicalNetwork = PhysicalNetwork(std::move(physical));
     std::vector<VirtualNetwork> virtualNetworks;
@@ -36,57 +44,6 @@ int main(int argc, char *argv[])
                 std::cout << "From: " << from->from << " " << from->to << " to: " << to->from << " " << to->to << std::endl;
         std::cout << std::endl;
     }
-
-    // Graph my_graph;
-    // my_graph.addVertex(1);
-    // my_graph.addVertex(2);
-    // my_graph.addVertex(3);
-    // my_graph.addVertex(5);
-    // my_graph.addEdge(1, 2, 10);
-    // my_graph.addEdge(1, 3, 20);
-    // my_graph.addEdge(2, 5, 15);
-    // my_graph.addEdge(3, 5, 7);
-    // my_graph.addVertex(4);
-    // my_graph.addEdge(5, 4, 1);
-
-    // int source_vertex_id = 1;
-    // int target_vertex_id = 4;
-
-    // try
-    // {
-    //     Graph::GraphShortestPathResult result = my_graph.findShortestPath(source_vertex_id, target_vertex_id);
-    //     std::cout << "Shortest path from vertex " << source_vertex_id << " to vertex " << target_vertex_id << " has distance " << result.distance << " and follows the vertices: ";
-    //     for (int vertex_id : result.path)
-    //     {
-    //         std::cout << vertex_id << " ";
-    //     }
-    //     std::cout << std::endl;
-    // }
-    // catch (const std::runtime_error &e)
-    // {
-    //     std::cerr << "Error: " << e.what() << std::endl;
-    // }
-    // FibonacciHeap<int, int> fib_heap;
-    // fib_heap.insert(8, 1);
-    // fib_heap.insert(4, 2);
-    // fib_heap.insert(1, 3);
-    // fib_heap.insert(7, 4);
-
-    // auto node_to_delete = fib_heap.find_node_by_value(2);
-    // if (node_to_delete)
-    // {
-    //     fib_heap.delete_node(node_to_delete);
-    //     std::cout << "Node with value 2 deleted." << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "Node with value 2 not found" << std::endl;
-    // }
-
-    // while(!fib_heap.is_empty()) {
-    //     std::cout << fib_heap.get_max() << " " << fib_heap.get_max_value() << std::endl;
-    //     fib_heap.delete_max();
-    // }
 
     return 0;
 }

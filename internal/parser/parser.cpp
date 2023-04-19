@@ -10,14 +10,14 @@ std::unique_ptr<Graph> JsonGraphParser::parseJsonToGraph(const json &graphJson, 
     const auto &vertices = graphJson["nodes"];
     for (const auto &vertex : vertices)
     {
-        int id = vertex["id"];
+        long long id = vertex["id"];
         auto coreFrequencyJson = vertex["coreFrequency"];
         if (!coreFrequencyJson.is_number())
         {
             throw std::runtime_error("Invalid vertex coreFrequency: " +
                                      coreFrequencyJson.dump());
         }
-        int coreFrequency = coreFrequencyJson;
+        long long coreFrequency = coreFrequencyJson;
 
         auto RAMJson = vertex["RAM"];
         if (!RAMJson.is_number())
@@ -25,7 +25,7 @@ std::unique_ptr<Graph> JsonGraphParser::parseJsonToGraph(const json &graphJson, 
             throw std::runtime_error("Invalid vertex RAM: " +
                                      RAMJson.dump());
         }
-        int RAM = RAMJson;
+        long long RAM = RAMJson;
 
         auto hardMemoryJson = vertex["hardMemory"];
         if (!hardMemoryJson.is_number())
@@ -33,7 +33,7 @@ std::unique_ptr<Graph> JsonGraphParser::parseJsonToGraph(const json &graphJson, 
             throw std::runtime_error("Invalid vertex hardMemory: " +
                                      hardMemoryJson.dump());
         }
-        int hardMemory = hardMemoryJson;
+        long long hardMemory = hardMemoryJson;
         result->addVertex(id, coreFrequency, RAM, hardMemory);
     }
 
@@ -41,15 +41,15 @@ std::unique_ptr<Graph> JsonGraphParser::parseJsonToGraph(const json &graphJson, 
     const auto &edges = graphJson["edges"];
     for (const auto &edge : edges)
     {
-        int from = edge["from"];
-        int to = edge["to"];
+        long long from = edge["from"];
+        long long to = edge["to"];
         auto capacityJson = edge["capacity"];
         if (!capacityJson.is_number())
         {
             throw std::runtime_error("Invalid edge capacity: " +
                                      capacityJson.dump());
         }
-        int capacity = capacityJson;
+        long long capacity = capacityJson;
 
         auto pingJson = edge["ping"];
         if (!pingJson.is_number())
@@ -57,7 +57,7 @@ std::unique_ptr<Graph> JsonGraphParser::parseJsonToGraph(const json &graphJson, 
             throw std::runtime_error("Invalid edge ping: " +
                                      pingJson.dump());
         }
-        int ping = pingJson;
+        long long ping = pingJson;
         result->addEdge(from, to, capacity, ping);
     }
 

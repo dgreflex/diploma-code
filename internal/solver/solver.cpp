@@ -88,9 +88,9 @@ void NetworkSolver::solve(PhysicalNetwork &physicalNetwork, std::vector<VirtualN
                 auto fPNode = physicalNetwork.frequencyUsage.find_node_by_value(physicalNode);
                 auto rPNode = physicalNetwork.RAMUsage.find_node_by_value(physicalNode);
                 auto mPNode = physicalNetwork.memoryUsage.find_node_by_value(physicalNode);
-                physicalNetwork.frequencyUsage.decrease_key(fPNode, fPNode->key - virtualNode->coreFrequency / physicalNode->coreFrequency);
-                physicalNetwork.RAMUsage.decrease_key(rPNode, rPNode->key - virtualNode->RAM / physicalNode->RAM);
-                physicalNetwork.memoryUsage.decrease_key(mPNode, mPNode->key - virtualNode->hardMemory / physicalNode->hardMemory);
+                physicalNetwork.frequencyUsage.decrease_key(fPNode, fPNode->key - (double) virtualNode->coreFrequency / physicalNode->coreFrequency);
+                physicalNetwork.RAMUsage.decrease_key(rPNode, rPNode->key - (double) virtualNode->RAM / physicalNode->RAM);
+                physicalNetwork.memoryUsage.decrease_key(mPNode, mPNode->key - (double) virtualNode->hardMemory / physicalNode->hardMemory);
 
                 found = true;
                 break;
@@ -124,7 +124,12 @@ void NetworkSolver::solve(PhysicalNetwork &physicalNetwork, std::vector<VirtualN
                 // Отображаем ребро виртуальной сети на ребра физической сети
                 for (size_t i = 0; i < shortestPath.path.size() - 1; ++i)
                 {
-                    auto physicalEdge = physicalNetwork.g->getEdge(shortestPath.path[i], shortestPath.path[i + 1]);
+                    auto pathFrom = shortestPath.path[i];
+                    auto pathTo = shortestPath.path[i + 1];
+                    auto physicalEdge = physicalNetwork.g->getEdge(pathFrom, pathTo);
+                    if (physicalEdge == nullptr) {
+                        physicalEdge = physicalNetwork.g->getEdge(pathTo, pathFrom);
+                    }
                     physicalNetwork.mapped_edges[physicalEdge].push_back(virtualEdge);
                     virtualNetwork.mapped_edges_on_physical_network[virtualEdge].push_back(physicalEdge);
 

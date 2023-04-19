@@ -7,6 +7,7 @@
 #include <limits>
 #include <cmath>
 #include <bits/stdc++.h>
+#include <sstream>
 
 template <typename CoreValue, typename KeyType>
 class FibonacciHeap
@@ -21,7 +22,7 @@ public:
         std::shared_ptr<HeapNode<Core, Key>> child;
         std::shared_ptr<HeapNode<Core, Key>> left;
         std::shared_ptr<HeapNode<Core, Key>> right;
-        std::weak_ptr<HeapNode> parent;
+        std::weak_ptr<HeapNode<Core, Key>> parent;
         Core value;
 
         explicit HeapNode(Key key, Core value)
@@ -30,6 +31,21 @@ public:
     };
 
     explicit FibonacciHeap() : max_(nullptr), size_(0) {}
+
+    std::vector<std::string> get_text_debug()
+    {
+        auto copy = *this;
+        std::vector<std::string> res;
+        int i = 0;
+        while (!copy.is_empty())
+        {
+            std::ostringstream get_the_address;
+            get_the_address << copy.get_max_value();
+            res.push_back(std::to_string(i++) + " " + get_the_address.str());
+            copy = copy.copy_without_max();
+        }
+        return res;
+    }
 
     std::shared_ptr<HeapNode<CoreValue, KeyType>> insert(double key, CoreValue value)
     {
@@ -284,29 +300,28 @@ public:
         }
 
         FibonacciHeap<CoreValue, KeyType> new_heap;
+        std::unordered_set<std::shared_ptr<HeapNode<CoreValue, KeyType>>> visited;
 
-        // Функция для добавления узлов в новую кучу
         std::function<void(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &)> add_nodes_to_new_heap;
         add_nodes_to_new_heap = [&](const std::shared_ptr<HeapNode<CoreValue, KeyType>> &src)
         {
-            if (!src)
+            if (!src || visited.count(src) > 0)
                 return;
-            auto current = src;
-            do
+            visited.insert(src);
+
+            if (src != max_)
             {
-                if (current != max_)
-                {
-                    new_heap.insert(current->key, current->value);
-                }
-                if (current->child)
-                {
-                    add_nodes_to_new_heap(current->child);
-                }
-                current = current->right;
-            } while (current != src);
+                new_heap.insert(src->key, src->value);
+            }
+
+            if (src->child)
+            {
+                add_nodes_to_new_heap(src->child);
+            }
+
+            add_nodes_to_new_heap(src->right);
         };
 
-        // Добавляем узлы в новую кучу
         add_nodes_to_new_heap(max_);
 
         return new_heap;
@@ -409,6 +424,11 @@ private:
 
     void consolidate()
     {
+        if (!max_)
+        {
+            return;
+        }
+
         std::vector<std::shared_ptr<HeapNode<CoreValue, KeyType>>> roots_table(
             static_cast<size_t>(std::log2(size_) + 1), nullptr);
 
@@ -416,10 +436,14 @@ private:
         auto current = max_old;
         do
         {
+            if (!current->right)
+            {
+                break;
+            }
             auto next = current->right;
             auto d = current->degree;
 
-            while (roots_table[d] != nullptr)
+            while (d < roots_table.size() && roots_table[d] != nullptr)
             {
                 auto other = roots_table[d];
                 if (current->key < other->key)
@@ -440,9 +464,13 @@ private:
                 roots_table[d] = nullptr;
                 d++;
             }
+            if (d >= roots_table.size())
+            {
+                roots_table.resize(d + 1, nullptr);
+            }
             roots_table[d] = current;
             current = next;
-        } while (current != max_old);
+        } while (current && current != max_old);
 
         max_ = nullptr;
         for (const auto &root : roots_table)
@@ -457,20 +485,25 @@ private:
         }
     }
 
-    void link(const std::shared_ptr<HeapNode<CoreValue, KeyType>> &y, const std::shared_ptr<HeapNode<CoreValue, KeyType>> &x)
+    void link(std::shared_ptr<HeapNode<CoreValue, KeyType>> y, std::shared_ptr<HeapNode<CoreValue, KeyType>> x)
     {
-        y->right->left = y->left;
+        // Remove y from the root list
         y->left->right = y->right;
+        y->right->left = y->left;
 
-        if (!x->child)
+        // Make y a child of x
+        if (x->child)
         {
-            x->child = y;
-            y->right = y;
-            y->left = y;
+            y->left = x->child->left;
+            y->right = x->child;
+            x->child->left->right = y;
+            x->child->left = y;
         }
         else
         {
-            merge_root_lists(x->child, y);
+            x->child = y;
+            y->left = y;
+            y->right = y;
         }
 
         y->parent = x;

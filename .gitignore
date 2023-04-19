@@ -8,3 +8,4 @@ CMakeCache*
 Makefile
 lib*
 main
+*.json

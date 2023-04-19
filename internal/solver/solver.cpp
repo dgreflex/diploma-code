@@ -33,12 +33,16 @@ void NetworkSolver::solve(PhysicalNetwork &physicalNetwork, std::vector<VirtualN
             default:
                 std::runtime_error("NetworkSolver::solve error");
             }
+            auto t1 = virtualNetwork.frequency.get_text_debug();
+            auto t2 = virtualNetwork.RAM.get_text_debug();
+            auto t3 = virtualNetwork.memory.get_text_debug();
+
             auto fHeapNode = virtualNetwork.frequency.find_node_by_value(virtualNode);
             auto rHeapNode = virtualNetwork.RAM.find_node_by_value(virtualNode);
             auto mHeapNode = virtualNetwork.memory.find_node_by_value(virtualNode);
             virtualNetwork.frequency.delete_node(fHeapNode);
-            virtualNetwork.RAM.delete_node(fHeapNode);
-            virtualNetwork.memory.delete_node(fHeapNode);
+            virtualNetwork.RAM.delete_node(rHeapNode);
+            virtualNetwork.memory.delete_node(mHeapNode);
 
             bool found = false;
             auto fHeap = physicalNetwork.frequencyUsage;

@@ -14,12 +14,14 @@ int main(int argc, char *argv[])
     // return 0;
 
     // std::string filename = "/home/reflex/Desktop/Diplom/code/tests/full_connect/test_5.json";
+    bool doVisual = false;
     auto parser = JsonGraphParser::getInstance();
     if (argc < 2)
     {
         std::cerr << "Not enough arguments" << std::endl;
         return 1;
     }
+    
 
     auto [physical, virtuals] = parser->parseJsonToGraphs(std::string(argv[1]));
 
@@ -30,10 +32,12 @@ int main(int argc, char *argv[])
 
     auto solver = NetworkSolver::getInstance();
     solver->solve(physicalNetwork, virtualNetworks);
-    physicalNetwork.g->visualizeGraph(physicalNetwork.g->getName() + ".png");
+    if (doVisual)
+        physicalNetwork.g->visualizeGraph(physicalNetwork.g->getName() + ".png");
     for (auto &v : virtualNetworks)
     {
-        v.g->visualizeGraph(v.g->getName() + ".png");
+        if (doVisual)
+            v.g->visualizeGraph(v.g->getName() + ".png");
         std::cout << "Virtual Graph: " << v.g->getName() << std::endl;
         std::cout << "Nodes:" << std::endl;
         for (auto &[virtNodeMap, physNodeMap] : v.mapped_nodes_on_physical_network)

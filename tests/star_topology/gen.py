@@ -30,10 +30,8 @@ def generate_random_graph(num_vertices, coef):
     nodes = [generate_random_node(i, coef) for i in range(num_vertices)]
     edges = []
 
-    for i in range(num_vertices):
-        for j in range(i + 1, num_vertices):
-            if random.choice([True, False]):
-                edges.append(generate_random_edge(i, j, coef))
+    for i in range(1, num_vertices):
+        edges.append(generate_random_edge(i, 0, coef))
 
     return {"nodes": nodes, "edges": edges}
 
@@ -60,12 +58,11 @@ def main():
     # num_vertices = int(input()) case 4 one test
     # graphs_quantity = int(input())
     # gen_test(num_vertices, graphs_quantity)
-    graph_quant_from_to = [1, 1]
-    num_vertices=list(map(int, input("Input From To\n").split()))
+    graph_quant_from_to = [1,1]
+    num_vertices = list(map(int, input("Input From To\n").split()))
     for i in num_vertices:
         print(i)
         gen_test(i, random.randint(graph_quant_from_to[0], graph_quant_from_to[1]))
-
 
 
 if __name__ == "__main__":

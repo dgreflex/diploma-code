@@ -18,11 +18,12 @@
 class Vertex
 {
 public:
-    int id = 0;
+    int id;
     long long coreFrequency;
     long long RAM;
     long long hardMemory;
-    Vertex(long long coreFrequency = 0, long long RAM = 0, long long hardMemory = 0, int id = 0) : coreFrequency(coreFrequency), RAM(RAM), hardMemory(hardMemory), id(id) {}
+    Vertex(long long coreFrequency = 0, long long RAM = 0, long long hardMemory = 0, int id = 0) : 
+    coreFrequency(coreFrequency), RAM(RAM), hardMemory(hardMemory), id(id) {}
 
     std::string toString() const;
 
@@ -41,7 +42,8 @@ public:
     long long ping;
     int from;
     int to;
-    Edge(long long capacity = 0, long long ping = 0, int from = 0, int to = 0) : capacity(capacity), ping(ping), from(from), to(to) {}
+    Edge(long long capacity = 0, long long ping = 0, int from = 0, int to = 0) :
+    capacity(capacity), ping(ping), from(from), to(to) {}
 
     bool operator<(const std::shared_ptr<Edge> &other) const;
     bool operator==(const std::shared_ptr<Edge> &other) const;

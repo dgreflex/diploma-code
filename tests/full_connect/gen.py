@@ -42,16 +42,16 @@ def save_graph_to_json(graph, filename):
         json.dump(graph, file, indent=4)
 
 
-def gen_test(num_vertices, graphs_quantity):
+def gen_test(num_vertices, graphs_quantity, ratio):
     phys = generate_random_graph(num_vertices, 1)
     virts = [
         generate_random_graph(
-            num_vertices - random.randint(0, num_vertices // 2), graphs_quantity * 2
+            num_vertices // ratio, graphs_quantity * (1 / 0.7)
         )
         for _ in range(graphs_quantity)
     ]
 
-    filename = "test_{}.json".format(num_vertices)
+    filename = "test_{}_{}.json".format(num_vertices,graphs_quantity)
     save_graph_to_json({"physical": phys, "virtuals": virts}, filename)
 
 
@@ -59,10 +59,12 @@ def main():
     # num_vertices = int(input()) case 4 one test
     # graphs_quantity = int(input())
     # gen_test(num_vertices, graphs_quantity)
-    graph_quant_from_to = [1, 1]
+    
+    graph_quant_from_to = [1]
     num_vertices=list(map(int, input("Input From To\n").split()))
-    for i in num_vertices:
-        gen_test(i, random.randint(graph_quant_from_to[0], graph_quant_from_to[1]))
+    for j in graph_quant_from_to:
+        for i in num_vertices:
+            gen_test(i, j, 2)
 
 
 

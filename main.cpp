@@ -8,6 +8,8 @@
 #include <chrono>
 
 double calc_accuracy(PhysicalNetwork &physical);
+double calculate_mean(const std::vector<double> &values);
+double calculate_standard_deviation(const std::vector<double> &values);
 
 int main(int argc, char *argv[])
 {
@@ -18,7 +20,7 @@ int main(int argc, char *argv[])
 
     // return 0;
 
-    // std::string filename = "/home/reflex/Desktop/Diplom/code/tests/full_connect/test_5.json";
+    // std::string filename = "/home/reflex/Desktop/Diplom/code/tests/full_connect/test_9_2.json";
 
     bool doVisual = false;
     auto parser = JsonGraphParser::getInstance();
@@ -27,7 +29,6 @@ int main(int argc, char *argv[])
         std::cerr << "Not enough arguments" << std::endl;
         return 1;
     }
-    
 
     auto [physical, virtuals] = parser->parseJsonToGraphs(std::string(argv[1]));
 
@@ -36,7 +37,6 @@ int main(int argc, char *argv[])
     std::vector<VirtualNetwork> virtualNetworks;
     for (auto &v : virtuals)
         virtualNetworks.push_back(VirtualNetwork(std::move(v)));
-
     auto solver = NetworkSolver::getInstance();
     solver->solve(physicalNetwork, virtualNetworks);
     auto t_end = std::chrono::high_resolution_clock::now();
@@ -64,10 +64,18 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-double calc_accuracy(PhysicalNetwork &physical) {
+double calc_accuracy(PhysicalNetwork &physical)
+{
     double accuracy = 0;
     std::vector<double> fraq;
-    for (auto &[physNum, virtuals] : physical.mapped_vertices) {
+    for (int physNum = 0; physNum < physical.g->getVertices().size(); physNum++)
+    {
+        if (physical.mapped_vertices.find(physNum) == physical.mapped_vertices.end())
+        {
+            fraq.push_back(0.0);
+            continue;
+        }
+        auto virtuals = physical.mapped_vertices[physNum];
         long long cpu, RAM, hard;
         cpu = 0;
         RAM = 0;
@@ -78,14 +86,31 @@ double calc_accuracy(PhysicalNetwork &physical) {
             RAM += v->RAM;
             hard += v->hardMemory;
         }
-        double cpuFraq = (double) cpu / physical.g->getVertex(physNum)->coreFrequency;
-        double RAMFraq = (double) RAM / physical.g->getVertex(physNum)->RAM;
-        double hardFraq = (double) hard / physical.g->getVertex(physNum)->hardMemory;
+        double cpuFraq = (double)cpu / physical.g->getVertex(physNum)->coreFrequency;
+        double RAMFraq = (double)RAM / physical.g->getVertex(physNum)->RAM;
+        double hardFraq = (double)hard / physical.g->getVertex(physNum)->hardMemory;
         fraq.push_back((cpuFraq + RAMFraq + hardFraq) / 3);
     }
-    for (int i = 0; i < fraq.size(); i++)
-        for (int j = i + 1; j < fraq.size(); j++)
-            accuracy += std::abs(fraq[i] - fraq[j]) / (fraq.size() * (fraq.size() - 1) / 2.0);
 
-    return accuracy;
+    return calculate_standard_deviation(fraq);
+}
+
+double calculate_mean(const std::vector<double> &values)
+{
+    double sum = std::accumulate(values.begin(), values.end(), 0.0);
+    return sum / values.size();
+}
+
+double calculate_standard_deviation(const std::vector<double> &values)
+{
+    double mean = calculate_mean(values);
+    double sum_of_squares = 0.0;
+
+    for (const auto &value : values)
+    {
+        sum_of_squares += std::pow(value - mean, 2);
+    }
+
+    double variance = sum_of_squares / values.size();
+    return std::sqrt(variance);
 }

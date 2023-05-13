@@ -65,11 +65,12 @@ def main():
     num_vertices = int(input("Введите количество вершин: "))
     num_groups = int(input())
     num_switches = int(input())
+    num_graphs = int(input())
     dragonfly_topology = generate_dragonfly_topology(
         num_vertices, num_groups, num_switches, 1
     )
     virtuals = []
-    for _ in range(1):
+    for _ in range(num_graphs):
         virt = generate_dragonfly_topology(num_vertices, num_groups, num_switches, 10)
         virtuals.append(virt)
 

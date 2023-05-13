@@ -1,0 +1,412 @@
+{
+    "physical": {
+        "nodes": [
+            {
+                "id": 0,
+                "coreFrequency": 1452,
+                "RAM": 9094,
+                "hardMemory": 39483
+            },
+            {
+                "id": 1,
+                "coreFrequency": 2398,
+                "RAM": 4571,
+                "hardMemory": 21038
+            },
+            {
+                "id": 2,
+                "coreFrequency": 3860,
+                "RAM": 13256,
+                "hardMemory": 22416
+            },
+            {
+                "id": 3,
+                "coreFrequency": 3222,
+                "RAM": 9130,
+                "hardMemory": 34259
+            },
+            {
+                "id": 4,
+                "coreFrequency": 1313,
+                "RAM": 13447,
+                "hardMemory": 26795
+            },
+            {
+                "id": 5,
+                "coreFrequency": 1281,
+                "RAM": 7828,
+                "hardMemory": 38663
+            },
+            {
+                "id": 6,
+                "coreFrequency": 1062,
+                "RAM": 15293,
+                "hardMemory": 34944
+            },
+            {
+                "id": 7,
+                "coreFrequency": 3613,
+                "RAM": 6348,
+                "hardMemory": 22267
+            },
+            {
+                "id": 8,
+                "coreFrequency": 3689,
+                "RAM": 8572,
+                "hardMemory": 29159
+            }
+        ],
+        "edges": [
+            {
+                "from": 0,
+                "to": 1,
+                "capacity": 2990,
+                "ping": 68
+            },
+            {
+                "from": 0,
+                "to": 2,
+                "capacity": 4776,
+                "ping": 68
+            },
+            {
+                "from": 0,
+                "to": 3,
+                "capacity": 7830,
+                "ping": 20
+            },
+            {
+                "from": 0,
+                "to": 4,
+                "capacity": 5246,
+                "ping": 99
+            },
+            {
+                "from": 0,
+                "to": 5,
+                "capacity": 4584,
+                "ping": 6
+            },
+            {
+                "from": 0,
+                "to": 6,
+                "capacity": 4095,
+                "ping": 5
+            },
+            {
+                "from": 0,
+                "to": 7,
+                "capacity": 3415,
+                "ping": 38
+            },
+            {
+                "from": 0,
+                "to": 8,
+                "capacity": 7794,
+                "ping": 67
+            },
+            {
+                "from": 1,
+                "to": 2,
+                "capacity": 3950,
+                "ping": 97
+            },
+            {
+                "from": 1,
+                "to": 3,
+                "capacity": 8861,
+                "ping": 80
+            },
+            {
+                "from": 1,
+                "to": 4,
+                "capacity": 6962,
+                "ping": 96
+            },
+            {
+                "from": 1,
+                "to": 5,
+                "capacity": 7239,
+                "ping": 50
+            },
+            {
+                "from": 1,
+                "to": 6,
+                "capacity": 9377,
+                "ping": 96
+            },
+            {
+                "from": 1,
+                "to": 7,
+                "capacity": 4144,
+                "ping": 16
+            },
+            {
+                "from": 1,
+                "to": 8,
+                "capacity": 6208,
+                "ping": 69
+            },
+            {
+                "from": 2,
+                "to": 3,
+                "capacity": 5392,
+                "ping": 5
+            },
+            {
+                "from": 2,
+                "to": 4,
+                "capacity": 6734,
+                "ping": 81
+            },
+            {
+                "from": 2,
+                "to": 5,
+                "capacity": 8038,
+                "ping": 55
+            },
+            {
+                "from": 2,
+                "to": 6,
+                "capacity": 9180,
+                "ping": 12
+            },
+            {
+                "from": 2,
+                "to": 7,
+                "capacity": 7917,
+                "ping": 53
+            },
+            {
+                "from": 2,
+                "to": 8,
+                "capacity": 7515,
+                "ping": 83
+            },
+            {
+                "from": 3,
+                "to": 4,
+                "capacity": 8811,
+                "ping": 60
+            },
+            {
+                "from": 3,
+                "to": 5,
+                "capacity": 6730,
+                "ping": 91
+            },
+            {
+                "from": 3,
+                "to": 6,
+                "capacity": 8908,
+                "ping": 90
+            },
+            {
+                "from": 3,
+                "to": 7,
+                "capacity": 9539,
+                "ping": 26
+            },
+            {
+                "from": 3,
+                "to": 8,
+                "capacity": 5279,
+                "ping": 93
+            },
+            {
+                "from": 4,
+                "to": 5,
+                "capacity": 8224,
+                "ping": 58
+            },
+            {
+                "from": 4,
+                "to": 6,
+                "capacity": 7446,
+                "ping": 35
+            },
+            {
+                "from": 4,
+                "to": 7,
+                "capacity": 5719,
+                "ping": 31
+            },
+            {
+                "from": 4,
+                "to": 8,
+                "capacity": 8118,
+                "ping": 73
+            },
+            {
+                "from": 5,
+                "to": 6,
+                "capacity": 2643,
+                "ping": 8
+            },
+            {
+                "from": 5,
+                "to": 7,
+                "capacity": 7204,
+                "ping": 48
+            },
+            {
+                "from": 5,
+                "to": 8,
+                "capacity": 6264,
+                "ping": 20
+            },
+            {
+                "from": 6,
+                "to": 7,
+                "capacity": 7293,
+                "ping": 61
+            },
+            {
+                "from": 6,
+                "to": 8,
+                "capacity": 4101,
+                "ping": 36
+            },
+            {
+                "from": 7,
+                "to": 8,
+                "capacity": 2294,
+                "ping": 5
+            }
+        ]
+    },
+    "virtuals": [
+        {
+            "nodes": [
+                {
+                    "id": 0,
+                    "coreFrequency": 961,
+                    "RAM": 2347,
+                    "hardMemory": 8291
+                },
+                {
+                    "id": 1,
+                    "coreFrequency": 1300,
+                    "RAM": 1487,
+                    "hardMemory": 10915
+                },
+                {
+                    "id": 2,
+                    "coreFrequency": 391,
+                    "RAM": 3750,
+                    "hardMemory": 8548
+                },
+                {
+                    "id": 3,
+                    "coreFrequency": 990,
+                    "RAM": 4565,
+                    "hardMemory": 8059
+                }
+            ],
+            "edges": [
+                {
+                    "from": 0,
+                    "to": 1,
+                    "capacity": 3436,
+                    "ping": 13
+                },
+                {
+                    "from": 0,
+                    "to": 2,
+                    "capacity": 2182,
+                    "ping": 23
+                },
+                {
+                    "from": 0,
+                    "to": 3,
+                    "capacity": 1273,
+                    "ping": 46
+                },
+                {
+                    "from": 1,
+                    "to": 2,
+                    "capacity": 876,
+                    "ping": 11
+                },
+                {
+                    "from": 1,
+                    "to": 3,
+                    "capacity": 1561,
+                    "ping": 40
+                },
+                {
+                    "from": 2,
+                    "to": 3,
+                    "capacity": 2446,
+                    "ping": 46
+                }
+            ]
+        },
+        {
+            "nodes": [
+                {
+                    "id": 0,
+                    "coreFrequency": 1144,
+                    "RAM": 4444,
+                    "hardMemory": 11238
+                },
+                {
+                    "id": 1,
+                    "coreFrequency": 728,
+                    "RAM": 2023,
+                    "hardMemory": 10567
+                },
+                {
+                    "id": 2,
+                    "coreFrequency": 787,
+                    "RAM": 3658,
+                    "hardMemory": 7580
+                },
+                {
+                    "id": 3,
+                    "coreFrequency": 1174,
+                    "RAM": 4325,
+                    "hardMemory": 13578
+                }
+            ],
+            "edges": [
+                {
+                    "from": 0,
+                    "to": 1,
+                    "capacity": 1395,
+                    "ping": 99
+                },
+                {
+                    "from": 0,
+                    "to": 2,
+                    "capacity": 873,
+                    "ping": 31
+                },
+                {
+                    "from": 0,
+                    "to": 3,
+                    "capacity": 3078,
+                    "ping": 42
+                },
+                {
+                    "from": 1,
+                    "to": 2,
+                    "capacity": 2478,
+                    "ping": 23
+                },
+                {
+                    "from": 1,
+                    "to": 3,
+                    "capacity": 1806,
+                    "ping": 62
+                },
+                {
+                    "from": 2,
+                    "to": 3,
+                    "capacity": 2393,
+                    "ping": 30
+                }
+            ]
+        }
+    ]
+}

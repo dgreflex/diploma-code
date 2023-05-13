@@ -22,15 +22,15 @@ int main(int argc, char *argv[])
 
     // std::string filename = "/home/reflex/Desktop/Diplom/code/tests/full_connect/test_9_2.json";
 
-    bool doVisual = false;
     auto parser = JsonGraphParser::getInstance();
-    if (argc < 2)
+    if (argc < 3)
     {
         std::cerr << "Not enough arguments" << std::endl;
         return 1;
     }
 
     auto [physical, virtuals] = parser->parseJsonToGraphs(std::string(argv[1]));
+    bool doVisual = static_cast<int>(std::stoi(argv[2]));
 
     auto t_start = std::chrono::high_resolution_clock::now();
     auto physicalNetwork = PhysicalNetwork(std::move(physical));
@@ -44,22 +44,22 @@ int main(int argc, char *argv[])
     std::cout << calc_accuracy(physicalNetwork) << std::endl
               << std::chrono::duration<double, std::milli>(t_end - t_start).count() << std::endl;
 
-    // if (doVisual)
-    //     physicalNetwork.g->visualizeGraph(physicalNetwork.g->getName() + ".png");
-    // for (auto &v : virtualNetworks)
-    // {
-    //     if (doVisual)
-    //         v.g->visualizeGraph(v.g->getName() + ".png");
-    //     std::cout << "Virtual Graph: " << v.g->getName() << std::endl;
-    //     std::cout << "Nodes:" << std::endl;
-    //     for (auto &[virtNodeMap, physNodeMap] : v.mapped_nodes_on_physical_network)
-    //         std::cout << "From: " << virtNodeMap << " to: " << physNodeMap << std::endl;
-    //     std::cout << "Edges:" << std::endl;
-    //     for (auto &[from, toVector] : v.mapped_edges_on_physical_network)
-    //         for (auto &to : toVector)
-    //             std::cout << "From: " << from->from << " " << from->to << " to: " << to->from << " " << to->to << std::endl;
-    //     std::cout << std::endl;
-    // }
+    if (doVisual)
+        physicalNetwork.g->visualizeGraph(physicalNetwork.g->getName() + ".png");
+    for (auto &v : virtualNetworks)
+    {
+        if (doVisual)
+            v.g->visualizeGraph(v.g->getName() + ".png");
+        std::cout << "Virtual Graph: " << v.g->getName() << std::endl;
+        std::cout << "Nodes:" << std::endl;
+        for (auto &[virtNodeMap, physNodeMap] : v.mapped_nodes_on_physical_network)
+            std::cout << "From: " << virtNodeMap << " to: " << physNodeMap << std::endl;
+        std::cout << "Edges:" << std::endl;
+        for (auto &[from, toVector] : v.mapped_edges_on_physical_network)
+            for (auto &to : toVector)
+                std::cout << "From: " << from->from << " " << from->to << " to: " << to->from << " " << to->to << std::endl;
+        std::cout << std::endl;
+    }
 
     return 0;
 }

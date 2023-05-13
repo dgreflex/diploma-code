@@ -60,11 +60,9 @@ def main():
     # num_vertices = int(input()) case 4 one test
     # graphs_quantity = int(input())
     # gen_test(num_vertices, graphs_quantity)
-    graph_quant_from_to = [1, 1]
-    num_vertices=list(map(int, input("Input From To\n").split()))
-    for i in num_vertices:
-        print(i)
-        gen_test(i, random.randint(graph_quant_from_to[0], graph_quant_from_to[1]))
+    num_vertices=int(input("Input num vertices\n"))
+    graph_quant_from_to = int(input("Input virtual graphs quantity"))
+    gen_test(num_vertices, graph_quant_from_to)
 
 
 

@@ -3,59 +3,65 @@
         "nodes": [
             {
                 "id": 0,
-                "coreFrequency": 5,
-                "RAM": 200,
-                "hardMemory": 100
+                "coreFrequency": 1846,
+                "RAM": 12643,
+                "hardMemory": 36324
             },
             {
                 "id": 1,
-                "coreFrequency": 10,
-                "RAM": 150,
-                "hardMemory": 250
+                "coreFrequency": 2236,
+                "RAM": 6973,
+                "hardMemory": 31187
             },
             {
                 "id": 2,
-                "coreFrequency": 10,
-                "RAM": 450,
-                "hardMemory": 450
+                "coreFrequency": 1554,
+                "RAM": 11447,
+                "hardMemory": 38082
             },
             {
                 "id": 3,
-                "coreFrequency": 10,
-                "RAM": 550,
-                "hardMemory": 550
+                "coreFrequency": 3398,
+                "RAM": 11088,
+                "hardMemory": 26109
             }
         ],
         "edges": [
             {
                 "from": 0,
                 "to": 1,
-                "capacity": 100,
-                "ping": 10
+                "capacity": 7852,
+                "ping": 63
             },
             {
-                "from": 1,
+                "from": 0,
                 "to": 2,
-                "capacity": 200,
-                "ping": 10
+                "capacity": 8029,
+                "ping": 31
             },
             {
                 "from": 0,
                 "to": 3,
-                "capacity": 200,
-                "ping": 10
+                "capacity": 3772,
+                "ping": 81
+            },
+            {
+                "from": 1,
+                "to": 2,
+                "capacity": 4084,
+                "ping": 2
             },
             {
                 "from": 1,
                 "to": 3,
-                "capacity": 200,
-                "ping": 10
+                "capacity": 3057,
+                "ping": 81
             },
             {
                 "from": 2,
                 "to": 3,
-                "capacity": 500,
-                "ping": 10
+                "capacity": 8703,
+                "ping": 63
             }
         ]
     },
@@ -64,101 +70,23 @@
             "nodes": [
                 {
                     "id": 0,
-                    "coreFrequency": 5,
-                    "RAM": 200,
-                    "hardMemory": 100
+                    "coreFrequency": 909,
+                    "RAM": 7824,
+                    "hardMemory": 17415
                 },
                 {
                     "id": 1,
-                    "coreFrequency": 10,
-                    "RAM": 150,
-                    "hardMemory": 250
-                },
-                {
-                    "id": 2,
-                    "coreFrequency": 10,
-                    "RAM": 450,
-                    "hardMemory": 450
-                },
-                {
-                    "id": 3,
-                    "coreFrequency": 10,
-                    "RAM": 550,
-                    "hardMemory": 550
+                    "coreFrequency": 2653,
+                    "RAM": 7168,
+                    "hardMemory": 14738
                 }
             ],
             "edges": [
                 {
                     "from": 0,
                     "to": 1,
-                    "capacity": 100,
-                    "ping": 10
-                },
-                {
-                    "from": 1,
-                    "to": 3,
-                    "capacity": 200,
-                    "ping": 10
-                },
-                {
-                    "from": 2,
-                    "to": 3,
-                    "capacity": 500,
-                    "ping": 10
-                }
-            ]
-        },
-        {
-            "nodes": [
-                {
-                    "id": 0,
-                    "coreFrequency": 5,
-                    "RAM": 200,
-                    "hardMemory": 100
-                },
-                {
-                    "id": 1,
-                    "coreFrequency": 10,
-                    "RAM": 150,
-                    "hardMemory": 250
-                },
-                {
-                    "id": 2,
-                    "coreFrequency": 10,
-                    "RAM": 450,
-                    "hardMemory": 450
-                },
-                {
-                    "id": 3,
-                    "coreFrequency": 10,
-                    "RAM": 550,
-                    "hardMemory": 550
-                }
-            ],
-            "edges": [
-                {
-                    "from": 1,
-                    "to": 2,
-                    "capacity": 200,
-                    "ping": 10
-                },
-                {
-                    "from": 0,
-                    "to": 3,
-                    "capacity": 200,
-                    "ping": 10
-                },
-                {
-                    "from": 1,
-                    "to": 3,
-                    "capacity": 200,
-                    "ping": 10
-                },
-                {
-                    "from": 2,
-                    "to": 3,
-                    "capacity": 500,
-                    "ping": 10
+                    "capacity": 5653,
+                    "ping": 86
                 }
             ]
         }
